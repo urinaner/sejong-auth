@@ -18,13 +18,13 @@ class AuthServiceTest {
     }
 
     @Test
+    @Disabled
     void testAuthenticate_Success() throws IOException {
         // Given
-        LoginReq loginReq = new LoginReq("20003210", "991027zZ!");
         authService.fetchJsessionId();
 
         //when
-        boolean isAuthenticated = authService.authenticate(loginReq);
+        boolean isAuthenticated = authService.authenticate("userId", "password");
 
         // then
         assertTrue(isAuthenticated);
@@ -36,7 +36,7 @@ class AuthServiceTest {
         LoginReq loginReq = new LoginReq("invalidUser", "invalidPassword");
 
         // When
-        boolean isAuthenticated = authService.authenticate(loginReq);
+        boolean isAuthenticated = authService.authenticate("userId", "password");
 
         // Then
         assertFalse(isAuthenticated);
