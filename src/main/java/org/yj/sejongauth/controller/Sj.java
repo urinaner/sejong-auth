@@ -1,5 +1,7 @@
 package org.yj.sejongauth.controller;
 
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import org.yj.sejongauth.domain.AuthService;
 import org.yj.sejongauth.domain.SjProfile;
 import org.yj.sejongauth.domain.ProfileService;
