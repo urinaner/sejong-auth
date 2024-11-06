@@ -77,7 +77,7 @@ public class SjConfig {
 `Sj.login()` 메서드를 사용하여 로그인 및 프로필 정보를 조회할 수 있습니다.
 
 ```java
-SjProfile profile = Sj.login("userId", "password");
+SjProfile profile = Sj.login("학번", "비밀번호");
 System.out.println("User profile: " + profile);
 ```
 
@@ -94,6 +94,7 @@ public class Main {
 
         try {
             SjProfile profile = Sj.login("userId", "password");
+
             System.out.println("Login successful. User profile: " + profile);
         } catch (RuntimeException e) {
             System.err.println("Login failed: " + e.getMessage());
