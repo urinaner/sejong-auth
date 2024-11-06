@@ -1,6 +1,6 @@
 # SejongAuth
 
-SejongAuth는 세종대학교 통합 로그인 페이지에 접근하여 사용자 인증과 프로필 정보를 가져오는 Java 기반의 패키지입니다. `Sj`를 통해 세종대학교 포털에 간편하게 로그인하고 사용자의 학적 정보를 조회할 수 있습니다.
+SejongAuth는 세종대학교 통합 로그인 페이지에 접근하여 사용자 인증과 프로필 정보를 가져오는 Java 기반의 스프링 패키지입니다. `Sj`를 통해 세종대학교 포털에 간편하게 로그인하고 사용자의 학적 정보를 조회할 수 있습니다.
 
 ## 주요 기능
 
@@ -21,7 +21,7 @@ dependencyResolutionManagement {
 		}
 	}
 dependencies {
-	        implementation 'com.github.urinaner:sejong-auth:Tag'
+	        implementation 'com.github.urinaner:sejong-auth:최신버전'
 	}
 ```
 maven
@@ -63,20 +63,21 @@ SejongAuth/
 
 ## 사용법
 
-### 1. `LoginRequestDto` 생성
-
-로그인 요청 객체를 생성합니다.
-
+### 1. `SjConfig` 생성
 ```java
-LoginRequestDto loginRequestDto = new LoginRequestDto("userId", "password");
+@Configuration
+@Import(SjSetConfig.class)
+public class SjConfig {
+}
 ```
+
 
 ### 2. 로그인 및 프로필 조회
 
 `Sj.login()` 메서드를 사용하여 로그인 및 프로필 정보를 조회할 수 있습니다.
 
 ```java
-ProfileRes profile = Sj.login(loginReq);
+SjProfile profile = Sj.login("userId", "password");
 System.out.println("User profile: " + profile);
 ```
 
@@ -90,10 +91,9 @@ System.out.println("User profile: " + profile);
 
 public class Main {
     public static void main(String[] args) {
-        LoginReq loginReq = new LoginReq("testUser", "testPassword");
 
         try {
-            ProfileRes profile = Sj.login(loginReq);
+            SjProfile profile = Sj.login("userId", "password");
             System.out.println("Login successful. User profile: " + profile);
         } catch (RuntimeException e) {
             System.err.println("Login failed: " + e.getMessage());
