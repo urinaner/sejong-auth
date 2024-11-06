@@ -1,0 +1,11 @@
+jdk:
+  - openjdk21
+
+before_install:
+  - sdk install java 21.0.1-zulu
+  - sdk use java 21.0.1-zulu
+  - sdk install maven
+  - mvn -v
+
+install:
+  - ./gradlew build publishToMavenLocal
