@@ -11,6 +11,15 @@ import org.yj.sejongauth.domain.ProfileService;
 @ComponentScan("org.yj.sejongauth")
 public class AutoConfig {
     @Bean
+    public AuthService authService() {
+        return new AuthService();
+    }
+
+    @Bean
+    public ProfileService profileService() {
+        return new ProfileService();
+    }
+    @Bean
     public Sj sj(AuthService authService, ProfileService profileService) {
         return new Sj(authService, profileService);
     }
