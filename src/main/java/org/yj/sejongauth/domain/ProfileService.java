@@ -7,7 +7,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ProfileService {
     private final String PROFILE_URL = "http://classic.sejong.ac.kr/userCertStatus.do?menuInfoId=MAIN_02_05";
     private final String FAIDED_PROFILE = "정보 조회에 실패하였습니다.";
