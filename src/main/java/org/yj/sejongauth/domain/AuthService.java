@@ -9,7 +9,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Map;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AuthService {
     private String jsessionId;
     private final String SJ_LOGIN_URL = "https://classic.sejong.ac.kr/userLogin.do";
