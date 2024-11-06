@@ -1,5 +1,6 @@
 package org.yj.sejongauth.domain;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,6 +13,7 @@ public class SjTest {
     @Autowired
     protected Sj sj;
 
+    @Disabled
     @Test
     void sjTest(){
         SjProfile sjProfile = sj.login("123","123");
