@@ -25,7 +25,7 @@ dependencies {
 	}
 ```
 maven
-```yaml
+```bash
 <repositories>
 		<repository>
 		    <id>jitpack.io</id>
@@ -63,20 +63,13 @@ SejongAuth/
 
 ## 사용법
 
-### 1. `LoginRequestDto` 생성
 
-로그인 요청 객체를 생성합니다.
-
-```java
-LoginRequestDto loginRequestDto = new LoginRequestDto("userId", "password");
-```
-
-### 2. 로그인 및 프로필 조회
+### 1. 로그인 및 프로필 조회
 
 `Sj.login()` 메서드를 사용하여 로그인 및 프로필 정보를 조회할 수 있습니다.
 
 ```java
-ProfileRes profile = Sj.login(loginReq);
+SjProfile profile = Sj.login("학번", "비밀번호");
 System.out.println("User profile: " + profile);
 ```
 
@@ -90,10 +83,9 @@ System.out.println("User profile: " + profile);
 
 public class Main {
     public static void main(String[] args) {
-        LoginReq loginReq = new LoginReq("testUser", "testPassword");
 
         try {
-            ProfileRes profile = Sj.login(loginReq);
+            ProfileRes profile = Sj.login("학번", "비밀번호");
             System.out.println("Login successful. User profile: " + profile);
         } catch (RuntimeException e) {
             System.err.println("Login failed: " + e.getMessage());
