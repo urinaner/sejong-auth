@@ -1,6 +1,6 @@
 package org.yj.sejongauth.domain;
 
-public class ProfileRes {
+public class SjProfile {
     private final String major;
     private final String studentCode;
     private final String name;
@@ -9,9 +9,9 @@ public class ProfileRes {
     private final int completedSemesters;
     private final int verifiedSemesters;
 
-    public ProfileRes(String major, String studentCode, String name,
-                      int gradeLevel, String userStatus,
-                      int completedSemesters, int verifiedSemesters) {
+    public SjProfile(String major, String studentCode, String name,
+                     int gradeLevel, String userStatus,
+                     int completedSemesters, int verifiedSemesters) {
         this.major = major;
         this.studentCode = studentCode;
         this.name = name;

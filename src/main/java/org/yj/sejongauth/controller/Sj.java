@@ -1,19 +1,23 @@
 package org.yj.sejongauth.controller;
 
 import org.yj.sejongauth.domain.AuthService;
-import org.yj.sejongauth.domain.LoginReq;
-import org.yj.sejongauth.domain.ProfileRes;
+import org.yj.sejongauth.domain.SjProfile;
 import org.yj.sejongauth.domain.ProfileService;
 
 public class Sj {
 
-    private static final AuthService authService = new AuthService();
-    private static final ProfileService PROFILE_SERVICE = new ProfileService();
+    private final AuthService authService;
+    private final ProfileService profileService;
 
-    public static ProfileRes login(LoginReq loginReq) {
-        if (authService.authenticate(loginReq)) {
+    public Sj(AuthService authService, ProfileService profileService){
+        this.authService = authService;
+        this.profileService = profileService;
+    }
+
+    public SjProfile login(String userId, String password) {
+        if (authService.authenticate(userId, password)) {
             String jsessionId = authService.getJsessionId();
-            return PROFILE_SERVICE.fetchUserProfile(jsessionId);
+            return profileService.fetchUserProfile(jsessionId);
         } else {
             throw new RuntimeException("인증에 실패하였습니다.");
         }

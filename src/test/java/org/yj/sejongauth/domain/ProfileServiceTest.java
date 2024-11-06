@@ -22,7 +22,7 @@ class ProfileServiceTest {
         String jsessionId = "valid-session-id";
 
         // When
-        ProfileRes profile = profileService.fetchUserProfile(jsessionId);
+        SjProfile profile = profileService.fetchUserProfile(jsessionId);
 
         // Then
         assertNotNull(profile);
