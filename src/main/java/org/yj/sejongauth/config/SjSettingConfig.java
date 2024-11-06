@@ -9,7 +9,7 @@ import org.yj.sejongauth.domain.ProfileService;
 
 @Configuration
 @ComponentScan("org.yj.sejongauth")
-public class AutoConfig {
+public class SjSettingConfig {
     @Bean
     public AuthService authService() {
         return new AuthService();

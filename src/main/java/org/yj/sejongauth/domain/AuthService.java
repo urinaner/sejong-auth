@@ -73,9 +73,7 @@ public class AuthService {
             }
 
             int responseCode = connection.getResponseCode();
-            System.out.println(responseCode);
             String responseMessage = readResponse(connection);
-            System.out.println(responseMessage);
             return responseCode == 302 && !responseMessage.contains(CONTAINS_HTML);
         } catch (URISyntaxException e) {
             throw new RuntimeException(INVALID_URL);
