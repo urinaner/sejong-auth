@@ -19,7 +19,8 @@ public class AuthService {
     private final String INVALID_URL = "URL이 유효하지 않습니다.";
     private final String CONTAINS_HTML = "로그인 정보가 올바르지 않습니다.";
 
-    public boolean authenticate(LoginReq loginReq) {
+    public boolean authenticate(String userId, String password) {
+        LoginReq loginReq = new LoginReq(userId, password);
         try {
             fetchJsessionId();
             return attemptLogin(loginReq);

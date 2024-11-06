@@ -12,7 +12,7 @@ public class ProfileService {
     private final String PROFILE_URL = "http://classic.sejong.ac.kr/userCertStatus.do?menuInfoId=MAIN_02_05";
     private final String FAIDED_PROFILE = "정보 조회에 실패하였습니다.";
 
-    public ProfileRes fetchUserProfile(String jsessionId) {
+    public SjProfile fetchUserProfile(String jsessionId) {
         try {
             URL url = new URL(PROFILE_URL);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -37,7 +37,7 @@ public class ProfileService {
         }
     }
 
-    private ProfileRes parseProfileFromHtml(Document document) {
+    private SjProfile parseProfileFromHtml(Document document) {
         String major = document.select("div.contentWrap li dl dd").get(0).text();
         String studentCode = document.select("div.contentWrap li dl dd").get(1).text();
         String name = document.select("div.contentWrap li dl dd").get(2).text();
@@ -46,6 +46,6 @@ public class ProfileService {
         int completedSemesters = Integer.parseInt(document.select("div.contentWrap li dl dd").get(5).text().split(" ")[0]);
         int verifiedSemesters = Integer.parseInt(document.select("div.contentWrap li dl dd").get(6).text().split(" ")[0]);
 
-        return new ProfileRes(major, studentCode, name, gradeLevel, userStatus, completedSemesters, verifiedSemesters);
+        return new SjProfile(major, studentCode, name, gradeLevel, userStatus, completedSemesters, verifiedSemesters);
     }
 }
