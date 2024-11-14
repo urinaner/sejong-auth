@@ -1,5 +1,7 @@
 package org.yj.sejongauth.domain;
 
+
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -7,8 +9,10 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
+import java.net.URLEncoder;
 import org.springframework.stereotype.Service;
 
 public class AuthService {
@@ -66,9 +70,10 @@ public class AuthService {
             connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             connection.setDoOutput(true);
 
-            String postData = "userId=" + loginReq.getUserId() + "&password=" + loginReq.getPassword();
+            String postData = "userId=" + URLEncoder.encode(loginReq.getUserId(), StandardCharsets.UTF_8.toString()) +
+                    "&password=" + URLEncoder.encode(loginReq.getPassword(), StandardCharsets.UTF_8.toString());
             try (OutputStream os = connection.getOutputStream()) {
-                byte[] input = postData.getBytes("utf-8");
+                byte[] input = postData.getBytes(StandardCharsets.UTF_8);
                 os.write(input, 0, input.length);
             }
 
