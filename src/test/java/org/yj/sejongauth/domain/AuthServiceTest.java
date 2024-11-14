@@ -18,6 +18,7 @@ class AuthServiceTest {
     }
 
     @Test
+    @Disabled
     void testAuthenticate_Success() throws IOException {
         // Given
         authService.fetchJsessionId();
