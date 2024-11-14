@@ -24,7 +24,7 @@ class AuthServiceTest {
         authService.fetchJsessionId();
 
         //when
-        boolean isAuthenticated = authService.authenticate("userId", "password");
+        boolean isAuthenticated = authService.authenticate("학번", "비번");
 
         // then
         assertTrue(isAuthenticated);
