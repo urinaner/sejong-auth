@@ -7,23 +7,21 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.springframework.stereotype.Service;
 
 public class ProfileService {
-    private final String PROFILE_URL = "http://classic.sejong.ac.kr/userCertStatus.do?menuInfoId=MAIN_02_05";
-    private final String FAIDED_PROFILE = "정보 조회에 실패하였습니다.";
+    private final String CLASSIC_URL = "https://classic.sejong.ac.kr/classic/reading/status.do";
+    private final String FAILED_PROFILE = "정보 조회에 실패하였습니다.";
 
-    public SjProfile fetchUserProfile(String jsessionId) {
+    public SjProfile fetchUserProfile(String ssoToken) {
         try {
-            URL url = new URL(PROFILE_URL);
+            URL url = new URL(CLASSIC_URL);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
-            connection.setRequestProperty("Cookie", "JSESSIONID=" + jsessionId);
-
+            connection.setRequestProperty("Cookie", "ssotoken=" + ssoToken);
             Document doc = Jsoup.parse(readResponse(connection));
             return parseProfileFromHtml(doc);
         } catch (IOException e) {
-            throw new RuntimeException(FAIDED_PROFILE);
+            throw new RuntimeException(FAILED_PROFILE);
         }
     }
 
@@ -39,14 +37,10 @@ public class ProfileService {
     }
 
     private SjProfile parseProfileFromHtml(Document document) {
-        String major = document.select("div.contentWrap li dl dd").get(0).text();
-        String studentCode = document.select("div.contentWrap li dl dd").get(1).text();
-        String name = document.select("div.contentWrap li dl dd").get(2).text();
-        int gradeLevel = Integer.parseInt(document.select("div.contentWrap li dl dd").get(3).text().split(" ")[0]);
-        String userStatus = document.select("div.contentWrap li dl dd").get(4).text();
-        int completedSemesters = Integer.parseInt(document.select("div.contentWrap li dl dd").get(5).text().split(" ")[0]);
-        int verifiedSemesters = Integer.parseInt(document.select("div.contentWrap li dl dd").get(6).text().split(" ")[0]);
+        String major = document.select("th:contains(학과명) + td").text().trim();
+        String name = document.select("th:contains(이름) + td").text().trim();
+        String userStatus = document.select("th:contains(사용자 상태) + td").text().trim();
 
-        return new SjProfile(major, studentCode, name, gradeLevel, userStatus, completedSemesters, verifiedSemesters);
+        return new SjProfile(major, name, userStatus);
     }
 }

@@ -18,7 +18,7 @@ public class Sj {
 
     public SjProfile login(String userId, String password) {
         if (authService.authenticate(userId, password)) {
-            String jsessionId = authService.getJsessionId();
+            String jsessionId = authService.getSsoToken();
             return profileService.fetchUserProfile(jsessionId);
         } else {
             throw new RuntimeException("인증에 실패하였습니다.");
